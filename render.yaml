@@ -4,7 +4,7 @@ services:
     name: qltb-web
     env: php
     plan: free
-    region: singapore
+    region: oregon
     buildCommand: "./build.sh"
     startCommand: "apache2-foreground"
     envVars:
@@ -32,4 +32,4 @@ services:
 databases:
   - name: qltb-db
     plan: free
-    region: singapore
+    region: oregon
