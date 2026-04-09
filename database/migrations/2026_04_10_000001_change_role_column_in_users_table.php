@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Gỡ bỏ ràng buộc check constraint cũ của PostgreSQL một cách trực tiếp
         Schema::table('users', function (Blueprint $table) {
-            // Chuyển role từ enum sang string để gỡ bỏ check constraint trên PostgreSQL
+            if (config('database.default') === 'pgsql') {
+                DB::statement('ALTER TABLE users DROP CONSTRAINT IF EXISTS users_role_check');
+            }
+            
+            // Sau đó mới chuyển sang string
             $table->string('role', 50)->default('teacher')->change();
         });
     }
