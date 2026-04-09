@@ -2,10 +2,11 @@ services:
   # Web Service chay Laravel
   - type: web
     name: qltb-web
-    runtime: php
+    env: php
     plan: free
     region: singapore
     buildCommand: "./build.sh"
+    startCommand: "apache2-foreground"
     envVars:
       - key: APP_ENV
         value: production
