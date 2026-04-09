@@ -1,12 +1,10 @@
 services:
-  # Web Service chay Laravel
+  # Web Service su dung Docker cho Laravel
   - type: web
     name: qltb-web
-    env: php
+    env: docker
     plan: free
     region: oregon
-    buildCommand: "./build.sh"
-    startCommand: "apache2-foreground"
     envVars:
       - key: APP_ENV
         value: production
