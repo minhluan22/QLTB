@@ -41,5 +41,5 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.
 # Expose port 80
 EXPOSE 80
 
-# Chạy script khởi động: chạy migration và khởi động apache
-CMD php artisan migrate --force && apache2-foreground
+# Chạy script khởi động: chạy migration, seed dữ liệu mẫu và khởi động apache
+CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground

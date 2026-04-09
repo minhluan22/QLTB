@@ -18,33 +18,39 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // ===== TẠO TÀI KHOẢN ADMIN =====
-        User::create([
-            'name'     => 'Quản Trị Viên',
-            'email'    => 'admin@qltb.local',
-            'password' => Hash::make('password'),
-            'role'     => 'admin',
-            'phone'    => '0901234567',
-            'school'   => 'Trường THPT ABC',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@qltb.local'],
+            [
+                'name'     => 'Quản Trị Viên',
+                'password' => Hash::make('password'),
+                'role'     => 'admin',
+                'phone'    => '0901234567',
+                'school'   => 'Trường THPT ABC',
+            ]
+        );
 
         // ===== TẠO GIÁO VIÊN MẪU =====
-        User::create([
-            'name'     => 'Nguyễn Văn An',
-            'email'    => 'teacher@qltb.local',
-            'password' => Hash::make('password'),
-            'role'     => 'teacher',
-            'phone'    => '0987654321',
-            'school'   => 'Trường THPT ABC',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'teacher@qltb.local'],
+            [
+                'name'     => 'Nguyễn Văn An',
+                'password' => Hash::make('password'),
+                'role'     => 'teacher',
+                'phone'    => '0987654321',
+                'school'   => 'Trường THPT ABC',
+            ]
+        );
 
-        User::create([
-            'name'     => 'Trần Thị Bích',
-            'email'    => 'teacher2@qltb.local',
-            'password' => Hash::make('password'),
-            'role'     => 'teacher',
-            'phone'    => '0912345678',
-            'school'   => 'Trường THPT ABC',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'teacher2@qltb.local'],
+            [
+                'name'     => 'Trần Thị Bích',
+                'password' => Hash::make('password'),
+                'role'     => 'teacher',
+                'phone'    => '0912345678',
+                'school'   => 'Trường THPT ABC',
+            ]
+        );
 
         // ===== TẠO THIẾT BỊ MẪU =====
         $devices = [
@@ -59,11 +65,12 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($devices as $device) {
-            Device::create(array_merge($device, ['status' => 'available']));
+            Device::updateOrCreate(
+                ['code' => $device['code']],
+                array_merge($device, ['status' => 'available'])
+            );
         }
 
-        $this->command->info('✅ Đã tạo dữ liệu mẫu thành công!');
-        $this->command->info('📧 Admin:   admin@qltb.local / password');
-        $this->command->info('📧 Teacher: teacher@qltb.local / password');
+        $this->command->info('✅ Đã cập nhật dữ liệu mẫu thành công!');
     }
 }
