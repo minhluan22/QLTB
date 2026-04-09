@@ -16,7 +16,7 @@ services:
         value: https://qltb-web.onrender.com
       - key: DB_CONNECTION
         value: pgsql
-      - key: DATABASE_URL
+      - key: DB_URL
         fromDatabase:
           name: qltb-db
           property: connectionString
