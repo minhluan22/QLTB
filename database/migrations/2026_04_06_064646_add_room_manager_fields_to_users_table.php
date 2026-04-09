@@ -18,8 +18,10 @@ return new class extends Migration
                   ->comment('Phòng quản lý: Phòng Lý, Phòng Hóa, Phòng Sinh');
         });
 
-        // Cập nhật enum role để thêm room_manager
-        DB::statement("ALTER TABLE users MODIFY COLUMN role ENUM('admin', 'teacher', 'room_manager') NOT NULL DEFAULT 'teacher'");
+        // Cập nhật enum role
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('role')->default('teacher')->change();
+        });
     }
 
     /**
@@ -29,8 +31,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('room_name');
+            $table->string('role')->default('teacher')->change();
         });
-
-        DB::statement("ALTER TABLE users MODIFY COLUMN role ENUM('admin', 'teacher') NOT NULL DEFAULT 'teacher'");
     }
 };
