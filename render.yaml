@@ -1,0 +1,35 @@
+services:
+  # Web Service chay Laravel
+  - type: web
+    name: qltb-web
+    env: php
+    plan: free
+    region: singapore
+    buildCommand: "./build.sh"
+    startCommand: "apache2-foreground" # Project Laravel su dung Apache (mac dinh cua Render PHP)
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        fromContext: app-key # Ban can tao Secret ten 'app-key' tren Render hoac nhap truc tiep
+      - key: APP_URL
+        value: https://qltb-web.onrender.com # Thay doi theo ten app ban chon
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: qltb-db
+          property: connectionString
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: LOG_CHANNEL
+        value: errorlog
+
+databases:
+  - name: qltb-db
+    plan: free
+    region: singapore
