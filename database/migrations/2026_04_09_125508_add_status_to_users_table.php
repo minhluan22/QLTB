@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('status')->default('pending')->after('role');
+            $table->string('status')->default('active')->after('role');
         });
 
         // Cập nhật tất cả user hiện tại thành active để không bị chặn đăng nhập đột ngột

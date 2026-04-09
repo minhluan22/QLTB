@@ -113,14 +113,14 @@ class AuthController extends Controller
         \App\Models\User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password, // Password mutator handles hashing if defined, or manually hash
+            'password' => $request->password,
             'role' => 'teacher',
             'subject_group' => $request->subject_group,
             'teaching_subject' => $request->teaching_subject,
-            'status' => 'pending',
+            'status' => 'active',
         ]);
 
         return redirect()->route('login')
-            ->with('success', 'Tài khoản đã tạo. Vui lòng chờ admin duyệt hoặc liên hệ người quản lý thiết bị.');
+            ->with('success', 'Đăng ký tài khoản thành công. Bạn có thể đăng nhập ngay bây giờ!');
     }
 }

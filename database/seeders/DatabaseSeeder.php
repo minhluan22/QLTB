@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
                 'role'     => 'admin',
                 'phone'    => '0901234567',
                 'school'   => 'Trường THPT ABC',
+                'status'   => 'active',
             ]
         );
 
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
                 'role'     => 'teacher',
                 'phone'    => '0987654321',
                 'school'   => 'Trường THPT ABC',
+                'status'   => 'active',
             ]
         );
 
@@ -49,6 +51,7 @@ class DatabaseSeeder extends Seeder
                 'role'     => 'teacher',
                 'phone'    => '0912345678',
                 'school'   => 'Trường THPT ABC',
+                'status'   => 'active',
             ]
         );
 
