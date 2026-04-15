@@ -67,7 +67,24 @@
 
         .input-group .form-control,
         .input-group .form-select {
+            border-radius: 0;
+        }
+
+        .btn-toggle-password {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-left: none;
             border-radius: 0 10px 10px 0;
+            color: #64748b;
+            padding: 0 15px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-toggle-password:hover {
+            color: #10b981;
+            background: #f1f5f9;
         }
 
         .btn-register {
@@ -230,6 +247,9 @@
                     <span class="input-group-text"><i class="bi bi-lock"></i></span>
                     <input type="password" id="password" name="password"
                         class="form-control @error('password') is-invalid @enderror" placeholder="Tối thiểu 6 ký tự">
+                    <button class="btn-toggle-password" type="button">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
             </div>
 
@@ -241,6 +261,9 @@
                     <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
                     <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
                         placeholder="Nhập lại mật khẩu">
+                    <button class="btn-toggle-password" type="button">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
             </div>
 
@@ -275,6 +298,24 @@
         window.addEventListener('DOMContentLoaded', () => {
             const sel = document.getElementById('subject_group_select');
             if (sel) toggleCustomGroup(sel);
+
+            // Xử lý ẩn/hiện mật khẩu
+            document.querySelectorAll('.btn-toggle-password').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    
+                    const icon = this.querySelector('i');
+                    if (type === 'password') {
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    } else {
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    }
+                });
+            });
         });
     </script>
 </body>

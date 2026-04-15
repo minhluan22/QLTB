@@ -104,7 +104,22 @@
         }
 
         .input-group .form-control {
+            border-radius: 0;
+        }
+
+        .btn-toggle-password {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-left: none;
             border-radius: 0 10px 10px 0;
+            color: #64748b;
+            padding: 0 15px;
+            transition: all 0.2s;
+        }
+
+        .btn-toggle-password:hover {
+            color: #1a73e8;
+            background: #f1f5f9;
         }
     </style>
 </head>
@@ -155,6 +170,9 @@
                     <input type="password" id="password" name="password"
                         class="form-control @error('password') is-invalid @enderror" placeholder="Nhập mật khẩu..."
                         autocomplete="current-password">
+                    <button class="btn-toggle-password" type="button" id="togglePassword">
+                        <i class="bi bi-eye"></i>
+                    </button>
                 </div>
                 @error('password')
                     <div class="text-danger mt-1" style="font-size:.8rem;">
@@ -210,6 +228,23 @@
                 } else {
                     localStorage.removeItem('qltb_remember_email');
                     localStorage.removeItem('qltb_remember_password');
+                }
+            });
+
+            // 3. Xử lý ẩn/hiện mật khẩu
+            const togglePassword = document.getElementById('togglePassword');
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Thay đổi icon
+                const icon = this.querySelector('i');
+                if (type === 'password') {
+                    icon.classList.remove('bi-eye-slash');
+                    icon.classList.add('bi-eye');
+                } else {
+                    icon.classList.remove('bi-eye');
+                    icon.classList.add('bi-eye-slash');
                 }
             });
         });

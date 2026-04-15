@@ -49,7 +49,7 @@ class AuthController extends Controller
                 $request->session()->regenerateToken();
 
                 return back()->withErrors([
-                    'email' => 'Tài khoản đang chờ phê duyệt hoặc liên hệ quản lý thiết bị.'
+                    'email' => 'Tài khoản của bạn đang chờ phê duyệt. Vui lòng liên hệ quản lý phòng thiết bị để được duyệt nhanh hơn.'
                 ]);
             }
 
@@ -117,10 +117,10 @@ class AuthController extends Controller
             'role' => 'teacher',
             'subject_group' => $request->subject_group,
             'teaching_subject' => $request->teaching_subject,
-            'status' => 'active',
+            'status' => 'pending',
         ]);
 
         return redirect()->route('login')
-            ->with('success', 'Đăng ký tài khoản thành công. Bạn có thể đăng nhập ngay bây giờ!');
+            ->with('success', 'Bạn đã tạo tài khoản thành công. Vui lòng chờ admin duyệt để đăng nhập hoặc liên hệ quản lý phòng thiết bị để nhanh hơn.');
     }
 }
